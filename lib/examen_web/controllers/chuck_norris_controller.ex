@@ -1,7 +1,6 @@
 defmodule ExamenWeb.ChuckNorrisController do
   use ExamenWeb, :controller
   action_fallback ExamenWeb.FallbackController
-  alias Examen.Accounts
   alias ExamenWeb.Services.ChuckNorris
 
   def chuck(conn, _params) do
@@ -10,9 +9,4 @@ defmodule ExamenWeb.ChuckNorrisController do
     end
   end
 
-  def create_api_token(conn, _params) do
-    user = Accounts.get_user_by_email("narvaez_1189@hotmail.com")
-    token = Accounts.create_user_api_token(user)
-    render(conn, %{token: token})
-  end
 end
