@@ -14,7 +14,7 @@ defmodule InteresesCompuestos do
     }
     else
       nil ->
-        {:error, :badRequest}
+        {:error, "Los valores no son correctos"}
     end
   end
   def validate_float(valor) do

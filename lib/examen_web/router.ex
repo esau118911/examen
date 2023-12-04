@@ -28,7 +28,6 @@ defmodule ExamenWeb.Router do
     pipe_through :api
     post "/calcular-intereses", ApiController, :index
     get "/chuck-norris", ChuckNorrisController, :chuck
-    get "/token", ChuckNorrisController, :create_api_token
 
   end
 
