@@ -6,6 +6,9 @@ defmodule ExamenWeb.ChuckNorrisController do
   def chuck(conn, _params) do
     with {:ok, data} <- ChuckNorris.get_directions() do
       render(conn, data)
+    else
+      _ ->
+        {:error, "Error desconocido"}
     end
   end
 

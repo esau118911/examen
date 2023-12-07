@@ -8,6 +8,9 @@ defmodule ExamenWeb.ApiController do
     data = InteresesCompuestos.calcular(principal, tasa_anual, periodos)
     with {:ok, data} <- data do
       render(conn, data)
+    else
+      _ ->
+        {:error, "Error desconocido"}
     end
   end
 end
