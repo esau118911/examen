@@ -1,6 +1,5 @@
 defmodule ExamenWeb.Services.Httpc do
-  def get_directions() do
-    url = "https://api.chucknorris.io/jokes/random"
+  def get_directions(url) do
     :inets.start()
     :ssl.start()
     headers = [{'accept', 'application/json'}]
@@ -18,7 +17,22 @@ defmodule ExamenWeb.Services.Httpc do
       {:ok, {{'HTTP/1.1', 200, 'OK'}, _headers, body}} ->
         body
         |> Jason.decode
-        |> IO.inspect()
     end
     end
+
+  def post_directions(url, data) do
+    :inets.start()
+    :ssl.start()
+    route = "http://localhost:4000#{url}"
+    headers = [{'accept', 'application/json'},{'Authorization', 'Bearer kKfKViS6DbDl9kUIydGk3rVpVPYYB43DFYN7gJ9brZ8'}]
+    encode = Jason.encode!(data)
+    :httpc.request(:post, {route,  headers, 'application/json', encode}, [], [])
+    |> case do
+      {:ok, {{'HTTP/1.1', 200, 'OK'}, _headers, body}} ->
+        body
+          |> Jason.decode()
+      { :error, :invalid_request} -> {:error, "Error en Envio de datos"}
+      { :error, errors } -> {:error, errors}
+      end
+   end
 end
