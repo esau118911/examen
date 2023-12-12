@@ -1,15 +1,15 @@
 defmodule ExamenWeb.ChuckNorrisController do
   use ExamenWeb, :controller
   action_fallback ExamenWeb.FallbackController
-  alias ExamenWeb.Services.ChuckNorris
+  alias ExamenWeb.Services.Httpc
 
   def chuck(conn, _params) do
-    with {:ok, data} <- ChuckNorris.get_directions() do
-      render(conn, data)
-    else
-      _ ->
-        {:error, "Error desconocido"}
-    end
+    Httpc.get_directions("https://api.chucknorris.io/jokes/random")
+      |> case do
+        {:ok, data} ->
+          render(conn, data)
+        _  -> {:error, "Error desconocido"}
+        end
   end
 
 end
