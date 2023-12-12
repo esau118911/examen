@@ -1,4 +1,4 @@
-<form>
+<form method="post" action="/calcular">
   <div class="space-y-12">
     <div class="border-b border-gray-900/10 pb-12">
       <h2 class="text-base font-semibold leading-7 text-gray-900">Intereses Compuestos</h2>
@@ -6,32 +6,34 @@
         <div class="sm:col-span-3">
           <label for="principal" class="block text-sm font-medium leading-6 text-gray-900">Principal</label>
           <div class="mt-2">
-            <input type="text" name="principal" id="principal" value="0" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input type="text" name="principal" id="principal" value="1000"  autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
         <div class="sm:col-span-3">
           <label for="tasa_anual" class="block text-sm font-medium leading-6 text-gray-900">Tasa Anual</label>
           <div class="mt-2">
-            <input id="tasa_anual" name="tasa_anual" type="number" min="0" value="0" step="any" autocomplete="Tasa Anual" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input id="tasa_anual" value="5" name="tasa_anual" type="number" min="0"  autocomplete="Tasa Anual" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
         <div class="sm:col-span-3">
           <label for="periodos" class="block text-sm font-medium leading-6 text-gray-900">Periodos</label>
           <div class="mt-2">
-            <input id="periodos" name="periodos" type="number" min="0" value="0"  autocomplete="Tasa Anual" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+            <input id="periodos" value="3" name="periodos" type="number" min="0"   autocomplete="Tasa Anual" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
         <div class="sm:col-span-3">
-          <label for="monto_total" class="block text-sm font-medium leading-6 text-gray-900">Monto Total</label>
+          <label for="monto_total" class="block text-sm font-medium leading-6 text-gray-900">Monto Total  </label>
+            
           <div class="mt-2">
-            <input id="monto_total" name="monto_total" type="number" min="0" value="0" step="any" autocomplete="Tasa Anual" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+           <h2><%= @error  %></h2>
+           <h2><%= Map.get(@data, "monto_total")  %></h2>
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="mt-6 flex items-center justify-end gap-x-6">
-    <button type="button" id="calcular" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Calcular</button>
+    <button type="submit"  class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Calcular</button>
   </div>
   <div class="border-b border-gray-900/10 pb-12">
       <h2 class="text-base font-semibold leading-7 text-gray-900">Integration API Chuck Norris</h2>
@@ -56,57 +58,5 @@
 </form>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-<script>
 
-  //FUNCIONALIDAD PARA CONSUMIR SERVICIO DE CALCULO DE INTERESES COMPUESTO
- let btnCalcular = document.getElementById("calcular"); 
- let btnConsultar = document.getElementById("consultar"); 
- let inputPrincipal = document.getElementById('principal');
- let inputTasa_anual = document.getElementById('tasa_anual');
- let inputPeriodos = document.getElementById('periodos');
- let inputMonto = document.getElementById('monto_total');
-
-
- btnCalcular.addEventListener("click", () => {
-      let datos = {
-      principal:  parseInt(inputPrincipal.value) ,
-      tasa_anual: parseFloat(inputTasa_anual.value), 
-      periodos:   parseInt(inputPeriodos.value)
-    }
-   
-    fetch('/services/calcular-intereses', {
-    method: "POST",
-    body: JSON.stringify(datos),
-    headers: {
-      "Content-type": "application/json;charset=UTF-8",
-      "Authorization" : "Bearer <%= @key %>",
-      "Access-Control-Allow-Origin" : "*"}
-    })
-    .then(response => response.json()) 
-    .then(function(json){
-      inputMonto.value=json.monto_total;
-    })
-    .catch(err => console.log(err));
-
-});
-
-//FUNCIONALIDAD DE PROXY
-btnConsultar.addEventListener("click", () => {
-   
-    fetch('/services/chuck-norris', {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json;charset=UTF-8",
-      "Authorization" : "Bearer <%= @key %>",
-      "Access-Control-Allow-Origin" : "*"}
-    })
-    .then(response => response.json()) 
-    .then(function(json){
-      document.getElementById('titulo').innerHTML = json.created_at;
-      document.getElementById('descripcion').innerHTML = json.value;
-      document.getElementById('url').innerHTML = json.url;
-    })
-    .catch(err => console.log(err));
-});
-</script>
 
