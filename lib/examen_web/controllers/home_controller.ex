@@ -4,8 +4,11 @@ defmodule ExamenWeb.HomeController do
   alias ExamenWeb.Services.Httpc
 
   def index(conn, _params) do
-    token = Application.get_env(:examen, :api_token )
-    render(conn, %{key: token, data: %{"monto_total" => 0}, error: ""})
+    render(conn, %{data: %{"monto_total" => 0}, error: ""})
+  end
+
+  def chuck(conn, _params) do
+    render(conn, %{data: %{}, error: ""})
   end
 
   def calcular(conn, params) do
@@ -13,15 +16,28 @@ defmodule ExamenWeb.HomeController do
                     "tasa_anual" => String.to_integer(Map.get(params, "tasa_anual")),
                     "periodos" => String.to_integer(Map.get(params, "periodos")),
                   }
-    Httpc.post_directions("/services/calcular-intereses", data_params)
+    Httpc.post_directions("http://localhost:4000/services/calcular-intereses", data_params)
     |> case do
-       {:ok, data} ->
+        {:ok, data} ->
           conn
-          |> render(:index, %{data: data, error: "" })
+            |> render(:index, %{data: data, error: "" })
         {:error, _ } ->
           conn
-          |> assign(:data, %{})
-          |> render(:index, %{error: "Error de Solicitud"})
-        end
+            |> assign(:data, %{})
+            |> render(:index, %{error: "Error de Solicitud"})
+       end
+  end
+
+  def chuck_norris(conn, params) do
+    Httpc.get_directions("http://localhost:4000/services/chuck-norris")
+      |> case do
+          {:ok, data} ->
+            conn
+              |> render(:chuck, %{data: data, error: "" })
+              {:error, _ } ->
+                conn
+                  |> assign(:data, %{})
+                  |> render(:chuck, %{error: "Error de Solicitud"})
+         end
   end
 end

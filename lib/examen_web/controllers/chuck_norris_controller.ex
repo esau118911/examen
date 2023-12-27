@@ -8,7 +8,6 @@ defmodule ExamenWeb.ChuckNorrisController do
       |> case do
         {:ok, data} ->
           render(conn, data)
-        _  -> {:error, "Error desconocido"}
         end
   end
 

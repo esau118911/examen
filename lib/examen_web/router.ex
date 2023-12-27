@@ -21,6 +21,9 @@ defmodule ExamenWeb.Router do
   scope "/", ExamenWeb do
     pipe_through :browser
     get "/", HomeController, :index
+    get "/norris", HomeController, :chuck
+    post "/calcular", HomeController, :calcular
+    get "/chuck", HomeController, :chuck_norris
 
   end
 
@@ -28,7 +31,6 @@ defmodule ExamenWeb.Router do
     pipe_through :api
     post "/calcular-intereses", ApiController, :index
     get "/chuck-norris", ChuckNorrisController, :chuck
-
   end
 
 

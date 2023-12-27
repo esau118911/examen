@@ -6,6 +6,7 @@
         <div class="sm:col-span-3">
           <label for="principal" class="block text-sm font-medium leading-6 text-gray-900">Principal</label>
           <div class="mt-2">
+            <input type="hidden"   name="_csrf_token" value={get_csrf_token()}>
             <input type="text" name="principal" id="principal" value="1000"  autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
           </div>
         </div>
@@ -35,26 +36,6 @@
   <div class="mt-6 flex items-center justify-end gap-x-6">
     <button type="submit"  class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Calcular</button>
   </div>
-  <div class="border-b border-gray-900/10 pb-12">
-      <h2 class="text-base font-semibold leading-7 text-gray-900">Integration API Chuck Norris</h2>
-      <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-        <div class="sm:col-span-3">
-           <div class="mt-6 flex items-center justify-end gap-x-6">
-              <button type="button" id="consultar" class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Consultar Proxy</button>
-            </div>
-        </div>
-        </div>
-        <div class="mx-auto mt-16 max-w-2xl rounded-3xl ring-1 ring-gray-200 sm:mt-20 lg:mx-0 lg:flex lg:max-w-none">
-         <div class="p-8 sm:p-10 lg:flex-auto">
-            <div class="mt-2" id="titulo">
-            </div>
-            <div class="mt-2" id="descripcion">
-            </div>
-            <div class="mt-2" id="url">
-            </div>
-          </div>
-        </div>
-    </div>
 </form>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>

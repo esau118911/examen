@@ -41,6 +41,14 @@ defmodule ExamenWeb.ErrorJSON do
       }
     }
   end
+  def render("500.json", _assigns) do
+    %{
+      "error" => %{
+        "code" => 500,
+        "msg" => "unauthorized"
+      }
+    }
+  end
   def render(template, _assigns) do
 
     %{error: %{detail: Phoenix.Controller.status_message_from_template(template)}}
