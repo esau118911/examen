@@ -1,5 +1,4 @@
 import Config
-
 # Configure your database
 config :examen, Examen.Repo,
   username: "postgres",

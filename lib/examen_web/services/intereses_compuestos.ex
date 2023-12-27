@@ -1,9 +1,9 @@
 defmodule InteresesCompuestos do
   def calcular(principal, tasa_anual, periodos) do
     with principal when not is_nil(principal) <- validate_integer(principal),
-         tasa_anual when  not is_nil(tasa_anual) <- validate_float(tasa_anual),
+         tasa_anual when  not is_nil(tasa_anual) <- validate_integer(tasa_anual),
          periodos when  not is_nil(periodos) <- validate_integer(periodos) do
-    monto_total = Float.round(principal * Float.pow(1 + tasa_anual, periodos),2)
+    monto_total = Float.round(principal * Float.pow(1 + (tasa_anual / 100), periodos),2)
     {:ok,
       %{
         monto_total: monto_total,
@@ -14,7 +14,7 @@ defmodule InteresesCompuestos do
     }
     else
       nil ->
-        {:error, :badRequest}
+        {:error, "Los valores no son correctos"}
     end
   end
   def validate_float(valor) do

@@ -39,4 +39,11 @@ defmodule ExamenWeb.UserSessionController do
     |> put_flash(:info, "Logged out successfully.")
     |> UserAuth.log_out_user()
   end
+
+  def create_api_token(conn, params) do
+    email  = Map.get(params, "email")
+    user = Accounts.get_user_by_email(email)
+    token = Accounts.create_user_api_token(user)
+    render(conn, %{token: token})
+  end
 end

@@ -21,4 +21,32 @@ defmodule ExamenWeb.FallbackController do
     |> put_view(json: ExamenWeb.ErrorJSON)
     |> render(:"400")
   end
+
+  def call(conn, {:error, :internalServerError}) do
+    conn
+    |> put_status(500)
+    |> put_view(json: ExamenWeb.ErrorJSON)
+    |> render(:"500")
+  end
+
+  def call(conn, {:error, :invalid_request}) do
+    conn
+    |> put_status(400)
+    |> put_view(html: ExamenWeb.ErrorHTML)
+    |> render(:"400")
+  end
+
+  def call(conn, {:error, msg}) do
+    conn
+    |> put_status(400)
+    |> put_view(html: ExamenWeb.ErrorHTML)
+    |> render(:"400", %{error: msg})
+  end
+
+  def call(conn, {:error, msg}) do
+    conn
+    |> put_status(400)
+    |> put_view(json: ExamenWeb.ErrorJSON)
+    |> render(:"400", %{error: msg})
+  end
 end
